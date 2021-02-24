@@ -7,14 +7,16 @@ function countDays($y, $m, $grafic)
 // массив условных обозначейний сменных графиков
 	$smeni=['1-1','1-2','1-3','2-1','2-2','2-3','3-1','3-2','3-3'];
 // выходные дни недели для графика работы
-	if($grafic=='5'){
+	if($grafic=='5'){      // пятидневка
 		$ignore = [6,7];
-	}elseif($grafic=='6'){
+	}elseif($grafic=='6'){ // шестидневка
 		$ignore = [7];
-	}elseif(in_array($grafic, $smeni)){
+	}elseif(in_array($grafic, $smeni)){ // смены
 		$smena = $grafic; 
 		$ignore = 'smena';
-	}else{
+	}elseif($grafic = '0')){ // ненормированный раб. день
+		$ignore = 'nenorm';
+	else{
 		var_dump('Неверно передан парамерт функции countDays');
 	}
 // подсчет выходных дней в зависимости от графика работы
@@ -24,6 +26,10 @@ function countDays($y, $m, $grafic)
 		$smena = explode ("-", $smena);
 		$c_rab = ceil(($ndays/($smena[0]+$smena[1]))*$smena[0]);
 		return $smena[0]  . "/".$smena[1]."</br>" .$c_rab;
+	}
+	// при ненормированном раб. дне
+	if ($ignore == 'nenorm'){
+		return $ndays;
 	}
 	// при пятидневке/шестидневке
 	for ($d=1; $d<=$ndays; $d++){
