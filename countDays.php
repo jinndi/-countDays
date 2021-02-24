@@ -14,8 +14,9 @@ function countDays($y, $m, $grafic)
 	}elseif(in_array($grafic, $smeni)){ // смены
 		$smena = $grafic; 
 		$ignore = 'smena';
-	}elseif($grafic = '0')){ // ненормированный раб. день
+	}elseif($grafic = '0'){ // ненормированный раб. день
 		$ignore = 'nenorm';
+	}
 	else{
 		var_dump('Неверно передан парамерт функции countDays');
 	}
